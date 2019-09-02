@@ -1,0 +1,87 @@
+@layout('layout/index')
+
+@section('content')
+
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Solicitud de reclamo</h1>
+			{{-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> --}}
+		</div>
+
+		<!-- Content Row -->
+		<div class="row">
+
+			<!-- Content Column -->
+			<div class="col-lg-12 mb-4">
+
+				<!-- Project Card Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3 d-flex justify-content-between align-items-center">
+
+						<h6 class="m-0 font-weight-bold text-primary">Realizar nueva solicitud</h6>
+
+					</div>
+					<div class="card-body">
+
+						<form action="/solicitud" method="post">
+							{{ csrfField() }}
+
+							<input type="hidden" name="estudiante" value="{{ 8 }}">
+							<div class="form-group row">
+								<div class="col">
+									<label for="tipo_solicitud">Tipo de Solicitud</label>
+									<select class="custom-select" name="tipo_solicitud" id="tipo_solicitud" required>
+										<option selected disable>Selecciona una solicitud</option>
+										@each(tipos in tipos)
+											<option value="{{ tipo.id }}">{{ tipo.solicitud }}</option>
+										@endeach
+
+									</select>
+								</div>
+								<div class="col">
+									<label for="profesor">Profesor responsable</label>
+									<select class="custom-select" name="profesor" id="profesor" required>
+										<option selected disable>Selecciona a un profesor</option>
+										@each(profesores in profesor)
+											<option value="{{ profesor.id }}">{{ profesor.profesor }}</option>
+										@endeach
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col">
+									<label for="materia">Materia</label>
+									<select class="custom-select" name="materia" id="materia" required>
+										<option selected disable>Selecciona una materia</option>
+										@each(materias in materia)
+											<option value="{{ materia.id }}">{{ materia.materia }}</option>
+										@endeach
+									</select>
+								</div>
+								<div class="col">
+									<label for="constancia">Sube tu constancia</label>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="constancia" name="constancia" required>
+										<label class="custom-file-label" for="constancia"></label>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-end">
+								<button class="btn btn-primary mt-3" type="submit">Enviar Petición</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- /.container-fluid -->
+
+@endsection
